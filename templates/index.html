@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de E/S (Interrupções)</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Gerenciamento de E/S e Interrupções</h1>
+    <p class="description">
+        Simula a execução de um processo sendo interrompido por dispositivos de hardware 
+        (Teclado, Impressora, Disco) com diferentes prioridades.
+    </p>
+
+    <div class="control-panel">
+        <div class="input-group">
+            <label for="tempo_simulacao">Duração da Simulação (Ciclos):</label>
+            <input type="number" id="tempo_simulacao" value="30" min="10" max="200">
+        </div>
+        <div class="input-group">
+            <label for="probabilidade">Probabilidade de Interrupção (%):</label>
+            <input type="number" id="probabilidade" value="20" min="0" max="100">
+            <small>Chance de um dispositivo solicitar E/S a cada ciclo.</small>
+        </div>
+        <button onclick="iniciarSimulacao()">Iniciar Simulação</button>
+    </div>
+
+    <hr>
+
+    <div id="resultado-container" style="display:none;">
+        <div class="summary">
+            <div class="card">
+                <h3>Tempo Total</h3>
+                <span id="res-tempo">0</span>
+            </div>
+            <div class="card">
+                <h3>Instruções Processadas</h3>
+                <span id="res-instrucoes">0</span>
+            </div>
+        </div>
+
+        <h2>Log de Eventos do Sistema</h2>
+        <div class="log-wrapper">
+            <table class="tabela-log">
+                <thead>
+                    <tr>
+                        <th width="10%">Tempo</th>
+                        <th width="15%">Tipo</th>
+                        <th width="55%">Evento / Ação do SO</th>
+                        <th width="20%">Contexto (PC)</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-corpo">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    function iniciarSimulacao() {
+        const btn = document.querySelector('button');
+        const container = document.getElementById('resultado-container');
+        const tbody = document.getElementById('tabela-corpo');
+        
+        // Feedback visual
+        btn.disabled = true;
+        btn.textContent = "Simulando...";
+        tbody.innerHTML = '';
+        container.style.display = 'none';
+
+        const dados = {
+            tempo_simulacao: document.getElementById('tempo_simulacao').value,
+            probabilidade: document.getElementById('probabilidade').value
+        };
+
+        fetch('/simular', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dados)
+        })
+        .then(response => response.json())
+        .then(data => {
+            btn.disabled = false;
+            btn.textContent = "Iniciar Simulação";
+
+            if (data.erro) {
+                alert(data.erro);
+                return;
+            }
+
+            renderizarResultados(data);
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            btn.disabled = false;
+            btn.textContent = "Iniciar Simulação";
+            alert("Erro de conexão com o simulador.");
+        });
+    }
+
+    function renderizarResultados(data) {
+        document.getElementById('resultado-container').style.display = 'block';
+        document.getElementById('res-tempo').textContent = data.total_ciclos;
+        document.getElementById('res-instrucoes').textContent = data.instrucoes_executadas;
+
+        const tbody = document.getElementById('tabela-corpo');
+        
+        data.log.forEach(item => {
+            const tr = document.createElement('tr');
+            
+            // Define classes para colorir as linhas baseada no tipo
+            let classeLinha = '';
+            if (item.tipo === 'INTERRUPCAO') classeLinha = 'row-interrupt';
+            else if (item.tipo === 'TRATAMENTO') classeLinha = 'row-handling';
+            else if (item.tipo === 'RETORNO') classeLinha = 'row-return';
+            else if (item.tipo === 'EXECUCAO') classeLinha = 'row-exec';
+
+            tr.className = classeLinha;
+
+            tr.innerHTML = `
+                <td><strong>${item.tempo}</strong></td>
+                <td><span class="badge ${item.tipo}">${item.tipo}</span></td>
+                <td>${item.mensagem}</td>
+                <td>${item.contexto}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+</script>
+
+</body>
+</html>
