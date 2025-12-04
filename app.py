@@ -10,21 +10,20 @@ CORS(app)
 def index():
     return render_template('index.html')
 
-# Rota da API (Recebe JSON, Retorna JSON)
+# Rota API
 @app.route('/simular', methods=['POST'])
 def simular():
     try:
         data = request.json
         
-        # Coleta parâmetros do usuário
+        # Parametros informados pelo usuário
         tempo_simulacao = int(data.get('tempo_simulacao', 20))
         probabilidade = int(data.get('probabilidade', 30))
         
-        # Validação simples
+        # Validação parametros inseridos
         if tempo_simulacao <= 0 or probabilidade < 0 or probabilidade > 100:
             return jsonify({"erro": "Parâmetros inválidos. Verifique os valores."}), 400
 
-        # Chama o motor
         resultado = simular_entrada_saida(tempo_simulacao, probabilidade)
         
         return jsonify(resultado)

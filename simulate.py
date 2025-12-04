@@ -1,9 +1,6 @@
 import random
 
 def simular_entrada_saida(tempo_total, probabilidade_interrupcao):
-    """
-    Simula o processamento com interrupções de E/S e salva log em TXT.
-    """
     
     # Definição dos Dispositivos e Prioridades
     dispositivos = [
@@ -26,7 +23,7 @@ def simular_entrada_saida(tempo_total, probabilidade_interrupcao):
 
     while relogio < tempo_total:
         
-        # 1. Verificar se ocorrem interrupções neste ciclo
+        # Verificar se ocorrem interrupções neste ciclo
         interrupcoes_neste_ciclo = []
         
         if random.randint(1, 100) <= probabilidade_interrupcao:
@@ -38,15 +35,15 @@ def simular_entrada_saida(tempo_total, probabilidade_interrupcao):
                 dev2 = random.choice(dispositivos)
                 interrupcoes_neste_ciclo.append(dev2)
 
-        # 2. Se houver interrupções, o SO precisa agir
+        # Valida se houve interrupções
         if interrupcoes_neste_ciclo:
             
-            # ORDENAR POR PRIORIDADE (Requisito fundamental)
+            # Ordenação por prioridade
             interrupcoes_neste_ciclo.sort(key=lambda x: x["prioridade"], reverse=True)
             
             for dispositivo in interrupcoes_neste_ciclo:
                 
-                # A. Salvar Contexto
+                # Salva Contexto
                 log_eventos.append({
                     "tempo": relogio,
                     "tipo": "INTERRUPCAO",
@@ -56,7 +53,7 @@ def simular_entrada_saida(tempo_total, probabilidade_interrupcao):
                 
                 contexto_salvo = contexto_processo 
                 
-                # B. Tratar a Interrupção
+                # Tratar a Interrupção
                 tempo_tratamento = dispositivo["tempo_tratamento"]
                 log_eventos.append({
                     "tempo": relogio + 1,
@@ -67,7 +64,7 @@ def simular_entrada_saida(tempo_total, probabilidade_interrupcao):
                 
                 relogio += tempo_tratamento
                 
-                # C. Restaurar Contexto
+                # Restaura o Contexto
                 contexto_processo = contexto_salvo 
                 
                 log_eventos.append({
@@ -78,7 +75,7 @@ def simular_entrada_saida(tempo_total, probabilidade_interrupcao):
                 })
 
         else:
-            # 3. Execução Normal
+            # Execução Normal
             contexto_processo += 1 
             log_eventos.append({
                 "tempo": relogio,
@@ -96,7 +93,7 @@ def simular_entrada_saida(tempo_total, probabilidade_interrupcao):
         "contexto": contexto_processo
     })
 
-    # --- GERAR ARQUIVO DE TEXTO ---
+    # Gerar arquivo txt
     try:
         with open("log_simulacao.txt", "w", encoding="utf-8") as arquivo:
             arquivo.write(f"=== RELATÓRIO DE SIMULAÇÃO ===\n")
@@ -105,14 +102,13 @@ def simular_entrada_saida(tempo_total, probabilidade_interrupcao):
             arquivo.write("-" * 60 + "\n")
             
             for item in log_eventos:
-                # Formata a linha como: [Tempo 10] [INTERRUPCAO] Mensagem...
+
                 linha = f"[Tempo {item['tempo']}] [{item['tipo']}] {item['mensagem']} | Contexto: {item['contexto']}\n"
                 arquivo.write(linha)
                 
         print("Arquivo 'log_simulacao.txt' gerado com sucesso!")
     except Exception as e:
         print(f"Erro ao salvar arquivo de log: {e}")
-    # -----------------------------------------------------------
 
     return {
         "log": log_eventos,

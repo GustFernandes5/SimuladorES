@@ -7,28 +7,29 @@ Probabilidade: 20%
 [Tempo 1] [EXECUCAO] Processo Principal em execução (CPU Ocupada). | Contexto: 2
 [Tempo 2] [EXECUCAO] Processo Principal em execução (CPU Ocupada). | Contexto: 3
 [Tempo 3] [EXECUCAO] Processo Principal em execução (CPU Ocupada). | Contexto: 4
-[Tempo 4] [INTERRUPCAO] Interrupção recebida (Impressora - Prio: Média). Salvando contexto... | Contexto: 4
-[Tempo 5] [TRATAMENTO] Tratando requisição do Impressora (Duração: 4 ciclos)... | Contexto: Sistema Operacional
-[Tempo 8] [RETORNO] Interrupção finalizada. Restaurando contexto (PC=4). | Contexto: 4
-[Tempo 8] [INTERRUPCAO] Interrupção recebida (Impressora - Prio: Média). Salvando contexto... | Contexto: 4
-[Tempo 9] [TRATAMENTO] Tratando requisição do Impressora (Duração: 4 ciclos)... | Contexto: Sistema Operacional
-[Tempo 12] [RETORNO] Interrupção finalizada. Restaurando contexto (PC=4). | Contexto: 4
-[Tempo 12] [EXECUCAO] Processo Principal em execução (CPU Ocupada). | Contexto: 5
-[Tempo 13] [EXECUCAO] Processo Principal em execução (CPU Ocupada). | Contexto: 6
-[Tempo 14] [EXECUCAO] Processo Principal em execução (CPU Ocupada). | Contexto: 7
-[Tempo 15] [EXECUCAO] Processo Principal em execução (CPU Ocupada). | Contexto: 8
-[Tempo 16] [INTERRUPCAO] Interrupção recebida (Disco - Prio: Baixa). Salvando contexto... | Contexto: 8
-[Tempo 17] [TRATAMENTO] Tratando requisição do Disco (Duração: 5 ciclos)... | Contexto: Sistema Operacional
-[Tempo 21] [RETORNO] Interrupção finalizada. Restaurando contexto (PC=8). | Contexto: 8
-[Tempo 21] [EXECUCAO] Processo Principal em execução (CPU Ocupada). | Contexto: 9
-[Tempo 22] [EXECUCAO] Processo Principal em execução (CPU Ocupada). | Contexto: 10
-[Tempo 23] [EXECUCAO] Processo Principal em execução (CPU Ocupada). | Contexto: 11
-[Tempo 24] [EXECUCAO] Processo Principal em execução (CPU Ocupada). | Contexto: 12
-[Tempo 25] [EXECUCAO] Processo Principal em execução (CPU Ocupada). | Contexto: 13
-[Tempo 26] [INTERRUPCAO] Interrupção recebida (Teclado - Prio: Alta). Salvando contexto... | Contexto: 13
-[Tempo 27] [TRATAMENTO] Tratando requisição do Teclado (Duração: 2 ciclos)... | Contexto: Sistema Operacional
-[Tempo 28] [RETORNO] Interrupção finalizada. Restaurando contexto (PC=13). | Contexto: 13
-[Tempo 28] [INTERRUPCAO] Interrupção recebida (Impressora - Prio: Média). Salvando contexto... | Contexto: 13
-[Tempo 29] [TRATAMENTO] Tratando requisição do Impressora (Duração: 4 ciclos)... | Contexto: Sistema Operacional
-[Tempo 32] [RETORNO] Interrupção finalizada. Restaurando contexto (PC=13). | Contexto: 13
-[Tempo 32] [FIM] Tempo limite atingido. Simulação encerrada. | Contexto: 13
+[Tempo 4] [EXECUCAO] Processo Principal em execução (CPU Ocupada). | Contexto: 5
+[Tempo 5] [EXECUCAO] Processo Principal em execução (CPU Ocupada). | Contexto: 6
+[Tempo 6] [EXECUCAO] Processo Principal em execução (CPU Ocupada). | Contexto: 7
+[Tempo 7] [EXECUCAO] Processo Principal em execução (CPU Ocupada). | Contexto: 8
+[Tempo 8] [EXECUCAO] Processo Principal em execução (CPU Ocupada). | Contexto: 9
+[Tempo 9] [INTERRUPCAO] Interrupção recebida (Teclado - Prio: Alta). Salvando contexto... | Contexto: 9
+[Tempo 10] [TRATAMENTO] Tratando requisição do Teclado (Duração: 2 ciclos)... | Contexto: Sistema Operacional
+[Tempo 11] [RETORNO] Interrupção finalizada. Restaurando contexto (PC=9). | Contexto: 9
+[Tempo 11] [INTERRUPCAO] Interrupção recebida (Disco - Prio: Baixa). Salvando contexto... | Contexto: 9
+[Tempo 12] [TRATAMENTO] Tratando requisição do Disco (Duração: 5 ciclos)... | Contexto: Sistema Operacional
+[Tempo 16] [RETORNO] Interrupção finalizada. Restaurando contexto (PC=9). | Contexto: 9
+[Tempo 16] [INTERRUPCAO] Interrupção recebida (Impressora - Prio: Média). Salvando contexto... | Contexto: 9
+[Tempo 17] [TRATAMENTO] Tratando requisição do Impressora (Duração: 4 ciclos)... | Contexto: Sistema Operacional
+[Tempo 20] [RETORNO] Interrupção finalizada. Restaurando contexto (PC=9). | Contexto: 9
+[Tempo 20] [INTERRUPCAO] Interrupção recebida (Disco - Prio: Baixa). Salvando contexto... | Contexto: 9
+[Tempo 21] [TRATAMENTO] Tratando requisição do Disco (Duração: 5 ciclos)... | Contexto: Sistema Operacional
+[Tempo 25] [RETORNO] Interrupção finalizada. Restaurando contexto (PC=9). | Contexto: 9
+[Tempo 25] [EXECUCAO] Processo Principal em execução (CPU Ocupada). | Contexto: 10
+[Tempo 26] [EXECUCAO] Processo Principal em execução (CPU Ocupada). | Contexto: 11
+[Tempo 27] [INTERRUPCAO] Interrupção recebida (Teclado - Prio: Alta). Salvando contexto... | Contexto: 11
+[Tempo 28] [TRATAMENTO] Tratando requisição do Teclado (Duração: 2 ciclos)... | Contexto: Sistema Operacional
+[Tempo 29] [RETORNO] Interrupção finalizada. Restaurando contexto (PC=11). | Contexto: 11
+[Tempo 29] [INTERRUPCAO] Interrupção recebida (Teclado - Prio: Alta). Salvando contexto... | Contexto: 11
+[Tempo 30] [TRATAMENTO] Tratando requisição do Teclado (Duração: 2 ciclos)... | Contexto: Sistema Operacional
+[Tempo 31] [RETORNO] Interrupção finalizada. Restaurando contexto (PC=11). | Contexto: 11
+[Tempo 31] [FIM] Tempo limite atingido. Simulação encerrada. | Contexto: 11
