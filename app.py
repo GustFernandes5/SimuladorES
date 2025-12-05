@@ -5,7 +5,6 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-# Rota para carregar a página
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -16,11 +15,9 @@ def simular():
     try:
         data = request.json
         
-        # Parametros informados pelo usuário
         tempo_simulacao = int(data.get('tempo_simulacao', 20))
         probabilidade = int(data.get('probabilidade', 30))
         
-        # Validação parametros inseridos
         if tempo_simulacao <= 0 or probabilidade < 0 or probabilidade > 100:
             return jsonify({"erro": "Parâmetros inválidos. Verifique os valores."}), 400
 

@@ -110,7 +110,6 @@
         data.log.forEach(item => {
             const tr = document.createElement('tr');
             
-            // Define classes para colorir as linhas baseada no tipo
             let classeLinha = '';
             if (item.tipo === 'INTERRUPCAO') classeLinha = 'row-interrupt';
             else if (item.tipo === 'TRATAMENTO') classeLinha = 'row-handling';

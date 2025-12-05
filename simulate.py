@@ -2,7 +2,6 @@ import random
 
 def simular_entrada_saida(tempo_total, probabilidade_interrupcao):
     
-    # Definição dos Dispositivos e Prioridades
     dispositivos = [
         {"nome": "Teclado", "prioridade": 3, "tipo": "Alta", "tempo_tratamento": 2},
         {"nome": "Impressora", "prioridade": 2, "tipo": "Média", "tempo_tratamento": 4},
@@ -13,7 +12,6 @@ def simular_entrada_saida(tempo_total, probabilidade_interrupcao):
     log_eventos = []
     relogio = 0
     
-    # Evento inicial
     log_eventos.append({
         "tempo": relogio,
         "tipo": "INFO",
@@ -23,27 +21,22 @@ def simular_entrada_saida(tempo_total, probabilidade_interrupcao):
 
     while relogio < tempo_total:
         
-        # Verificar se ocorrem interrupções neste ciclo
         interrupcoes_neste_ciclo = []
         
         if random.randint(1, 100) <= probabilidade_interrupcao:
             dev = random.choice(dispositivos)
             interrupcoes_neste_ciclo.append(dev)
             
-            # Chance de segunda interrupção (teste de prioridade na mesma unidade de tempo)
             if random.randint(1, 100) <= 30:
                 dev2 = random.choice(dispositivos)
                 interrupcoes_neste_ciclo.append(dev2)
 
-        # Valida se houve interrupções
         if interrupcoes_neste_ciclo:
             
-            # Ordenação por prioridade
             interrupcoes_neste_ciclo.sort(key=lambda x: x["prioridade"], reverse=True)
             
             for dispositivo in interrupcoes_neste_ciclo:
                 
-                # Salva Contexto
                 log_eventos.append({
                     "tempo": relogio,
                     "tipo": "INTERRUPCAO",
@@ -53,7 +46,6 @@ def simular_entrada_saida(tempo_total, probabilidade_interrupcao):
                 
                 contexto_salvo = contexto_processo 
                 
-                # Tratar a Interrupção
                 tempo_tratamento = dispositivo["tempo_tratamento"]
                 log_eventos.append({
                     "tempo": relogio + 1,
@@ -64,7 +56,6 @@ def simular_entrada_saida(tempo_total, probabilidade_interrupcao):
                 
                 relogio += tempo_tratamento
                 
-                # Restaura o Contexto
                 contexto_processo = contexto_salvo 
                 
                 log_eventos.append({
@@ -75,7 +66,6 @@ def simular_entrada_saida(tempo_total, probabilidade_interrupcao):
                 })
 
         else:
-            # Execução Normal
             contexto_processo += 1 
             log_eventos.append({
                 "tempo": relogio,
@@ -85,7 +75,6 @@ def simular_entrada_saida(tempo_total, probabilidade_interrupcao):
             })
             relogio += 1
 
-    # Evento final
     log_eventos.append({
         "tempo": relogio,
         "tipo": "FIM",
@@ -93,7 +82,6 @@ def simular_entrada_saida(tempo_total, probabilidade_interrupcao):
         "contexto": contexto_processo
     })
 
-    # Gerar arquivo txt
     try:
         with open("log_simulacao.txt", "w", encoding="utf-8") as arquivo:
             arquivo.write(f"=== RELATÓRIO DE SIMULAÇÃO ===\n")
